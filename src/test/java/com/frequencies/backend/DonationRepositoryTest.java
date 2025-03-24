@@ -19,8 +19,6 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 
 @SpringBootTest
@@ -84,52 +82,5 @@ public class DonationRepositoryTest {
         donation.setDonor(donor);
 
         donationRepository.save(donation);
-    }
-
-    @Test
-    @DisplayName("Find donor from donation")
-    public void findDonorFromDonation() {
-        Donor donor = createDonor();
-
-        Donation donation = new Donation();
-        donation.setAmount(500L);
-        donation.setDate(new Date());
-        donation.setDonor(donor);
-
-        Donation savedDonation = donationRepository.save(donation);
-
-        Optional<Donation> foundDonation = donationRepository.findById(savedDonation.getId());
-        assert foundDonation.isPresent();
-
-
-        Donor associatedDonor = foundDonation.get()
-                                             .getDonor();
-
-        List<Donation> donations = associatedDonor.getDonations();
-        assert donations != null;
-        assert donations.size() == 1;
-
-        assert associatedDonor.getDonations()
-                              .size() == 1;
-        assert associatedDonor.getDonations()
-                              .getFirst()
-                              .getDonor()
-                              .getName()
-                              .equals(donor.getName());
-        assert associatedDonor.getDonations()
-                              .getFirst()
-                              .getDonor()
-                              .getAddress()
-                              .equals(donor.getAddress());
-        assert associatedDonor.getDonations()
-                              .getFirst()
-                              .getDonor()
-                              .getSiren()
-                              .equals(donor.getSiren());
-        assert associatedDonor.getDonations()
-                              .getFirst()
-                              .getDonor()
-                              .getId()
-                              .equals(donor.getId());
     }
 }

@@ -1,15 +1,14 @@
 package com.frequencies.backend.service;
 
 import com.frequencies.backend.entity.Donation;
-import com.frequencies.backend.entity.Donor;
 import com.frequencies.backend.repository.DonationRepository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DonationService {
@@ -40,15 +39,12 @@ public class DonationService {
     public Donation findById(@NonNull Long id) {
         Donation donation = donationRepository.findById(id)
                                               .orElseThrow();
-//        Hibernate.initialize(donation.getDonor());
+        Hibernate.initialize(donation.getDonor());
         return donation;
     }
 
-    public Optional<List<Donation>> findAllDonationsByDonor(@NonNull Donor donor) {
-        return Optional.ofNullable(donor.getDonations());
-    }
-
-    public Optional<List<Donation>> findAllDonationsByDonorId(@NonNull Long id) {
-        return donationRepository.findAllDonationsByDonorId(id);
+    public List<Donation> findAllDonationsByDonorId(@NonNull Long id) {
+        return donationRepository.findAllDonationsByDonorId(id)
+                                 .orElseThrow();
     }
 }

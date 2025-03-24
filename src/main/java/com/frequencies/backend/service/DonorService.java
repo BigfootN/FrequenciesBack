@@ -33,9 +33,17 @@ public class DonorService {
         return donorRepository.save(donor);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Donor findDonorById(@NonNull Long id) {
         Donor donor = donorRepository.findDonorById(id)
+                                     .orElseThrow();
+        Hibernate.initialize(donor.getDonations());
+        return donor;
+    }
+
+    @Transactional(readOnly = true)
+    public Donor findDonorBySiren(@NonNull String siren) {
+        Donor donor = donorRepository.findDonorBySiren(siren)
                                      .orElseThrow();
         Hibernate.initialize(donor.getDonations());
         return donor;
