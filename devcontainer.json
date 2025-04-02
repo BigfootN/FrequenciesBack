@@ -1,9 +1,0 @@
-{
-  "name": "backend frequencies",
-  dockerComposeFile: [
-    "./docker-compose.yml"
-  ],
-  service: "db",
-  workspaceFolder: "/backend",
-  shutdownAction: "stopCompose"
-}
