@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.frequencies.server.DonationRepositoryTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.288 s -- in com.frequencies.server.DonationRepositoryTest
