@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("donor")
 public class DonorController {
     @NonNull
-    DonorService donorService;
+    private final DonorService donorService;
 
     @Autowired
-    public DonorController(@NonNull DonorService donorService) {
+    public DonorController(@NonNull final DonorService donorService) {
         this.donorService = donorService;
     }
 

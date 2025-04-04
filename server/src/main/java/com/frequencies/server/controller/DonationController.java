@@ -16,10 +16,10 @@ import java.util.List;
 @RequestMapping("donation")
 public class DonationController {
     @NonNull
-    private DonationService donationService;
+    private final DonationService donationService;
 
     @Autowired
-    public DonationController(@NonNull DonationService donationService) {
+    public DonationController(@NonNull final DonationService donationService) {
         this.donationService = donationService;
     }
 

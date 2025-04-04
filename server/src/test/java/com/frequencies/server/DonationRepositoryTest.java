@@ -15,8 +15,7 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import java.time.LocalDateTime;
-
+import java.util.Date;
 
 @SpringBootTest
 public class DonationRepositoryTest {
@@ -72,7 +71,7 @@ public class DonationRepositoryTest {
 
         Donation donation = new Donation();
         donation.setAmount(500L);
-        donation.setDate(LocalDateTime.now());
+        donation.setDate(new Date());
         donation.setPaymentType(PaymentType.Nature);
         donation.setDonor(donor);
 

@@ -1,20 +1,22 @@
 package com.frequencies.server.entity;
 
 import jakarta.persistence.*;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.lang.NonNull;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-@Table(name = "Donation")
+@Table(name = "donation")
 public class Donation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "donor_id")
     Donor donor;
 
     @Column(nullable = false)
-    private Date date;
+    private Timestamp date;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,6 +65,7 @@ public class Donation {
     }
 
     public void setDate(@NonNull final Date date) {
-        this.date = DateUtils.truncateToPrecision(date, Calendar.MINUTE);
+        this.date = new Timestamp(DateUtils.round(date, Calendar.MINUTE)
+                                           .getTime());
     }
 }

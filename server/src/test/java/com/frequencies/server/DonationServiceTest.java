@@ -17,7 +17,7 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -72,17 +72,17 @@ public class DonationServiceTest {
 
         Donor insertedDonor = donorService.insertDonor(donor);
 
-        LocalDateTime donationDate = LocalDateTime.now();
+        Date date = new Date();
         Long amount = 500L;
         PaymentType paymentType = PaymentType.Nature;
 
         Donation donation = new Donation();
         donation.setAmount(amount);
-        donation.setDate(donationDate);
+        donation.setDate(date);
         donation.setDonor(insertedDonor);
         donation.setPaymentType(paymentType);
 
-        donationService.insert(donation);
+        Donation insertedDonation = donationService.insert(donation);
 
         Donor foundDonor = donorService.findDonorById(donor.getId());
 
@@ -93,8 +93,11 @@ public class DonationServiceTest {
         Donation firstDonation = donations.get(0);
 
         assert firstDonation
-                .getAmount() == 500L;
-        assert firstDonation.getDate() == donationDate;
-        assert firstDonation.getPaymentType() == paymentType;
+                .getAmount()
+                .equals(insertedDonation.getAmount());
+        assert firstDonation.getDate()
+                            .equals(insertedDonation.getDate());
+        assert firstDonation.getPaymentType()
+                            .equals(insertedDonation.getPaymentType());
     }
 }
