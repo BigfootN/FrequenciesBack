@@ -1,0 +1,7 @@
+services:
+  backend:
+    restart: unless-stopped
+    image: frequences-backend:0.1.0
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
