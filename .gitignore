@@ -1,0 +1,13 @@
+server/target/**
+server/.idea/**
+server/.settings/**
+server/.classpath/**
+server/.project/**
+
+logs/target/**
+logs/.idea/**
+logs/.settings/**
+logs/.classpath/**
+logs/.project/**
+
+.idea/**
